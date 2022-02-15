@@ -1,0 +1,9 @@
+- Update .devcontainers/Dockerfile to point to latest release of CodeQL CLI
+- create codeql submodule
+  - `git submodule add https://github.com/github/codeql`
+  - `git commit -am 'Add CodeQL module'`
+  - `git push origin master`
+  - From CS we need to do:
+    - `git submodule init` to initialize your local configuration file 
+    - `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject
+- copy unzipped database
