@@ -1,4 +1,0 @@
-name: seclab/test
-libraryPathDependencies: codeql/java-queries
-# dependencies:
-#   codeql/java-all: '*'
