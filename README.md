@@ -1,7 +1,6 @@
 ## Init
 - create a new repo based on this template
   - `gh repo create <project repo> --public --clone --template pwntester/codeql-cs-template`
-- update `.devcontainer/Dockerfile` to point to latest release of CodeQL CLI
 - copy the zipped database into `databases/` (its better to unzip it in the CS)
 
 ## Using packs

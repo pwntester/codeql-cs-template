@@ -10,7 +10,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends fuse
-RUN curl -OL https://github.com/github/codeql-cli-binaries/releases/download/v2.8.0/codeql-linux64.zip && \
+#RUN curl -OL https://github.com/github/codeql-cli-binaries/releases/download/v2.8.0/codeql-linux64.zip && \
+RUN curl -L -s https://api.github.com/repos/github/codeql-cli-binaries/releases/latest | jq -r '.assets[] | select(.content_type == "application/zip" and .name == "codeql-linux64.zip") | {browser_download_url} | .browser_download_url' | wget -qi - && \
     unzip codeql-linux64.zip && \
     mv codeql /opt
 ENV PATH="/opt/codeql:${PATH}"
