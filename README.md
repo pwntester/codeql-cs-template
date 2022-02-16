@@ -1,9 +1,18 @@
-- Update .devcontainers/Dockerfile to point to latest release of CodeQL CLI
-- create codeql submodule
+- create a new repo based on this template
+  - `gh repo create <project repo> --public --clone --template pwntester/codeql-cs-template`
+- update `.devcontainer/Dockerfile` to point to latest release of CodeQL CLI
+- copy the zipped database into `databases/` (its better to unzip it in the CS)
+- create codeql submodule if needed
   - `git submodule add https://github.com/github/codeql`
   - `git commit -am 'Add CodeQL module'`
   - `git push origin master`
-  - From CS we need to do:
-    - `git submodule init` to initialize your local configuration file 
-    - `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject
-- copy unzipped database
+- update codeql submodule if needed:
+  - `git submodule init` to initialize your local configuration file 
+  - `git submodule update` to fetch all the data from that project and check out the appropriate commit listed in your superproject
+- create the CS
+  - `gh cs create --repo <project repo>`
+- ssh into the CS
+  - `gh cs ssh`
+- cleanup
+  - `gh cs delete` to remove and free the CS
+  - `gh repo delete` to remove the repo if needed
