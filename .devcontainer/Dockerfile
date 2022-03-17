@@ -8,10 +8,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 ARG NODE_VERSION="none"
 RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends fuse
-#RUN curl -OL https://github.com/github/codeql-cli-binaries/releases/download/v2.8.0/codeql-linux64.zip && \
-RUN curl -L -s https://api.github.com/repos/github/codeql-cli-binaries/releases/latest | jq -r '.assets[] | select(.content_type == "application/zip" and .name == "codeql-linux64.zip") | {browser_download_url} | .browser_download_url' | wget -qi - && \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends fuse
+RUN gh release --repo=github/codeql-cli-binaries download -p 'codeql-linux64.zip' \
     unzip codeql-linux64.zip && \
     mv codeql /opt
 ENV PATH="/opt/codeql:${PATH}"
